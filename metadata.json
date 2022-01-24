@@ -1,0 +1,8 @@
+{
+  "name": "Move Top Panel",
+  "description": "Move top panel",
+  "uuid": "move-top-panel@hyperparabolic.github.io",
+  "shell-version": [
+    "40"
+  ]
+}

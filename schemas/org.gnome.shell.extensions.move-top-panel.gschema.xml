@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <schema id="org.gnome.shell.extensions.move-top-panel" path="/org/gnome/shell/extensions/move-top-panel/">
+        <key type="i" name="monitor-index">
+            <default>2147483647</default>
+            <summary>monitor selection</summary>
+            <description>monitor selection</description>
+        </key>
+        <key type="i" name="monitor-count">
+            <default>1</default>
+            <summary>monitor count</summary>
+            <description>monitor count</description>
+        </key>
+    </schema>
+</schemalist>
