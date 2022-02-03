@@ -15,6 +15,20 @@ class Extension {
         this._indicator = null;
     }
 
+    log_with_context(msg) {
+        log(`${Me.metadata.name}: ${msg}`)
+    }
+
+    /*
+        Settings menu cannot access layoutManager, persist information
+        about monitors to gsettings on startup and on refresh
+    */
+    set_monitor_count() {
+        let monitorCount = LM.monitors.length;
+        this.log_with_context(`Setting monitor count: ${monitorCount}`);
+        this.settings.set_int('monitor-count', monitorCount);
+    }
+
     select_monitor() {
         let monitorIndex = this.settings.get_int('monitor-index');
 
@@ -32,12 +46,18 @@ class Extension {
         LM.panelBox.visible = true;
     }
 
+    refresh_state() {
+        this.log_with_context('Refreshing...');
+        this.set_monitor_count();
+        this.move_panel();
+    }
+
     enable() {
+        this.log_with_context('Initializing extension.');
         this.settings = ExtensionUtils.getSettings(
             'org.gnome.shell.extensions.move-top-panel');
 
-        let monitorCount = LM.monitors.length;
-        this.settings.set_int('monitor-count', monitorCount);
+        this.set_monitor_count();
 
         let indicatorName = `${Me.metadata.name} Indicator`;
         
@@ -48,6 +68,7 @@ class Extension {
             style_class: 'system-status-icon'
         });
         this._indicator.add_child(icon);
+        this._indicator.connect('button-press-event', () => this.refresh_state());
 
         Main.panel.addToStatusArea(indicatorName, this._indicator);
         this.move_panel();
