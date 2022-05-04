@@ -3,6 +3,7 @@
   "description": "Move top panel",
   "uuid": "move-top-panel@hyperparabolic.github.io",
   "shell-version": [
-    "40"
+    "40",
+    "42"
   ]
 }
